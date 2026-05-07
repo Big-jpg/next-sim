@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Caustics Lab
 
-## Getting Started
+A Next.js browser sandbox for experimenting with surface-driven caustic light patterns.
 
-First, run the development server:
+The simulation intentionally starts with a fast geometric approximation rather than full physical optics:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```txt
+surface height -> surface gradient -> ray deflection -> projected intensity
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This makes it suitable for learning, live parameter tuning, and later export experiments where a frozen height field can become a reflective plate, vacuum-form buck, resin-cast optic, or 3D printed mold.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Current features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Animated procedural surface fields
+- Water, faceted, and interference presets
+- Refractive bend, focus, exposure, blur, and ray density controls
+- Side-by-side projected caustic and virtual surface preview
+- Client-side canvas renderer with no backend dependency
 
-## Learn More
+## Getting started
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open `http://localhost:3000`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
+The original boids starter code is still present in the repository for reference, but the active route now mounts `components/OpticsLab.tsx`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Next implementation steps:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Add a frozen-frame export path for the surface height field.
+2. Convert the height field into an STL mesh.
+3. Add material presets for reflective versus refractive physical builds.
+4. Add a calibration target for real LED/projector testing.
